@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Show Product</title>
+    <style>
+        /* Add your beautiful background styles here */
+        body {
+            background-color: #f2f2f2;
+            background-image: linear-gradient(to bottom right, #3366ff, #00ccff);
+            background-attachment: fixed;
+        }
+        
+        /* Add your animations and other styles here */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fade-in 1s ease-out;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Show Product</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Product Stock</th>
+                    <th>Product Price</th>
+                    <th>Product Supplier</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in data %}
+                <tr>
+                    <td>{{ product['product_id'] }}</td>
+                    <td>{{ product['product_name'] }}</td>
+                    <td>{{ product['product_stock'] }}</td>
+                    <td>{{ product['product_price'] }}</td>
+                    <td>{{ product['product_supplier'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
