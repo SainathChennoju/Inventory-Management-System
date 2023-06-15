@@ -37,7 +37,7 @@ def home():
 
 ################################## For Showing Customers ######################################
 
-@app.route("/show-customers")
+@app.route("/show-customers",methods=['GET','POST'])
 def customer_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
@@ -55,7 +55,7 @@ def customer_show():
 
 ################################## For Showing Products #######################################
 
-@app.route("/show-product")
+@app.route("/show-product",methods=['GET','POST'])
 def product_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
