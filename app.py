@@ -273,7 +273,7 @@ def deleteproduct():
     else:
         return render_template('deleteproduct.html')
     
-@app.route("/delete-orders", methods=['GET', 'POST'])
+@app.route("/delete-order", methods=['GET', 'POST'])
 def deleteorder():
     if request.method == 'POST':
         conn=sqlite3.connect('ims.db')
