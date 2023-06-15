@@ -28,7 +28,6 @@ def idgenerator(tab):
     myint = int(myint)+1
     return idval[0:3]+str(myint)
 
-print(idgenerator('ORDERS'))
 
 # server='SAINATH\SQLEXPRESS'
 # database='IMS2'
