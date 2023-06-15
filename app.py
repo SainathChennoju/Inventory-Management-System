@@ -41,7 +41,7 @@ def home():
 def customer_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
-    cn.execute('select * from customer')
+    cn.execute("select * from customer")
     data=[]
     for i in cn.fetchall():
         customer={}
@@ -59,7 +59,7 @@ def customer_show():
 def product_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
-    cn.execute('select * from product')
+    cn.execute("select * from product")
     data=[]
     for i in cn.fetchall():
         product={}
@@ -79,7 +79,7 @@ def product_show():
 def order_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
-    cn.execute('select * from orders')
+    cn.execute("select * from orders")
     data=[]
     for i in cn.fetchall():
         orders={}
@@ -98,7 +98,7 @@ def order_show():
 def supplier_show():
     conn=sqlite3.connect('ims.db')
     cn=conn.cursor()
-    cn.execute('select * from supplier')
+    cn.execute("select * from supplier")
     data=[]
     for i in cn.fetchall():
         suppliers={}
