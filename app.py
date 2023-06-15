@@ -1,4 +1,5 @@
-import pyodbc
+### Establishing a connection to the SQL server ###
+
 from flask import Flask,jsonify,request,render_template
 import sqlite3
 app=Flask(__name__)
@@ -28,33 +29,13 @@ def idgenerator(tab):
     myint = int(myint)+1
     return idval[0:3]+str(myint)
 
-
-# server='SAINATH\SQLEXPRESS'
-# database='IMS2'
-# driver='{SQL Server}'
-
-# connection_string = f'DRIVER={driver};SERVER={server};DATABASE={database};trusted_connection=yes'
-
-# connect = pyodbc.connect(connection_string)
-
-# cn=connect.cursor()
-
-# customer_name='rtf'
-# customer_addr='hyd'
-# customer_email='rtf@gmail.com'
-
-# cn.execute('select * from customer')
-# print(cn.fetchall())
-# cn.execute(f"insert into customer(customer_name,customer_addr,customer_email) values('{customer_name}','{customer_addr}','{customer_email}')")
-# connect.commit()
-# #f is used to combine string and variable, used before string name
-
-
-@app.route('/')
+@app.route('/')    # routing homepage
 def home():
     return render_template('index.html')
 
 #Functions or API's for every front end hyperlinks
+
+################################## For Showing Customers ######################################
 
 @app.route("/show-customers")
 def customer_show():
@@ -71,6 +52,8 @@ def customer_show():
         data.append(customer)
     print(data)
     return render_template('showcustomers.html',data=data)
+
+################################## For Showing Products #######################################
 
 @app.route("/show-product")
 def product_show():
@@ -90,6 +73,8 @@ def product_show():
     print(data)
     return render_template('showproduct.html',data=data)
 
+################################## For Showing Orders #######################################
+
 @app.route("/show-orders")
 def order_show():
     conn=sqlite3.connect('ims.db')
@@ -106,6 +91,8 @@ def order_show():
         data.append(orders)
     print(data)
     return render_template('showorders.html',data=data)
+
+################################## For Showing Suppliers #######################################
 
 @app.route("/show-suppliers")
 def supplier_show():
@@ -124,6 +111,7 @@ def supplier_show():
     print(data)
     return render_template('showsuppliers.html',data=data)
 
+################################## For Adding Customers #######################################
 
 @app.route("/add-customer",methods=['GET','POST'])
 def addcustomer():
@@ -140,7 +128,9 @@ def addcustomer():
         return jsonify({'message':'successful'})
     else:
         return render_template('addcustomer.html')
-    
+
+################################## For Updating Customers #######################################
+
 @app.route("/update-customer",methods=['GET','POST'])
 def updatecustomer():
     if request.method=='POST':
@@ -155,6 +145,8 @@ def updatecustomer():
         return jsonify({'message':'successful'})
     else:
         return render_template('updatecustomer.html')
+    
+################################## For Adding Products #######################################
 
 @app.route("/add-product",methods=['GET','POST'])
 def addproduct():
@@ -172,7 +164,9 @@ def addproduct():
         return jsonify({'message':'successful'})
     else:
         return render_template('addproduct.html')
-    
+
+################################## For Adding Orders #######################################
+
 @app.route("/add-orders",methods=['GET','POST'])
 def addorder():
     if request.method=='POST':
@@ -189,6 +183,8 @@ def addorder():
     else:
         return render_template('addorder.html')
     
+################################## For Adding Suppliers #######################################
+
 @app.route("/add-supplier",methods=['GET','POST'])
 def addsupplier():
     if request.method=='POST':
@@ -204,7 +200,9 @@ def addsupplier():
         return jsonify({'message':'successful'})
     else:
         return render_template('addsupplier.html')
-    
+
+################################## For Updating Products #######################################
+
 @app.route("/update-product",methods=['GET','POST'])
 def updateproduct():
     if request.method=='POST':
@@ -219,7 +217,9 @@ def updateproduct():
         return jsonify({'message':'successful'})
     else:
         return render_template('updateproduct.html')
-    
+
+################################## For Updating Orders #######################################
+
 @app.route("/update-orders",methods=['GET','POST'])
 def updateorder():
     if request.method=='POST':
@@ -235,6 +235,8 @@ def updateorder():
     else:
         return render_template('updateorder.html')
     
+################################## For Updating Suppliers #######################################
+
 @app.route("/update-supplier",methods=['GET','POST'])
 def updatesupplier():
     if request.method=='POST':
@@ -250,6 +252,8 @@ def updatesupplier():
     else:
         return render_template('updatesupplier.html')
     
+################################## For Deleting Products #######################################
+
 @app.route("/delete-product", methods=['GET', 'POST'])
 def deleteproduct():
     if request.method == 'POST':
@@ -272,28 +276,23 @@ def deleteproduct():
     else:
         return render_template('deleteproduct.html')
     
-@app.route("/delete-order", methods=['GET', 'POST'])
+################################## For Deleting Orders #######################################
+
+@app.route('/delete-orders',methods =['GET','POST'])
 def deleteorder():
-    if request.method == 'POST':
-        conn=sqlite3.connect('ims.db')
-        cn = conn.cursor()
-        orderid = request.form.get('order_id')
-        
-        # Check if the order exists in the database
-        cn.execute(f"SELECT * FROM orders WHERE order_id = '{orderid}'")
-        order = cn.fetchone()
-        
-        if order:
-            # Delete the order from the database
-            cn.execute(f"DELETE FROM orders WHERE order_id = '{orderid}'")
-            conn.commit()
-            print('Order has been deleted')
-            return jsonify({'message': 'successful'})
-        else:
-            return jsonify({'error': 'Order does not exist'})
+    if request.method=='POST':
+        conn = sqlite3.connect('ims.db')
+        cn=conn.cursor()
+        ORDER_ID=request.form.get("orderid")
+        cn.execute(f"DELETE FROM ORDERS WHERE order_id = '{ORDER_ID}'")
+        conn.commit()
+        print('data inserted')
+        return jsonify({'message':'successful'})
     else:
         return render_template('deleteorder.html')
     
+################################## For deleting Suppliers #######################################
+
 @app.route("/delete-supplier", methods=['GET', 'POST'])
 def deletesupplier():
     if request.method == 'POST':
@@ -315,6 +314,8 @@ def deletesupplier():
             return jsonify({'error': 'Supplier does not exist'})
     else:
         return render_template('deletesupplier.html')
+    
+################################## For Deleting Customers #######################################
 
 @app.route("/delete-customer", methods=['GET', 'POST'])
 def deletecustomer():
