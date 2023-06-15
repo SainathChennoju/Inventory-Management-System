@@ -3,6 +3,7 @@ from flask import Flask,jsonify,request,render_template
 import sqlite3
 app=Flask(__name__)
 
+#creating function for id generation for all tables
 def idgenerator(tab):
     conn=sqlite3.connect('ims.db')
     cur = conn.cursor()
@@ -53,6 +54,8 @@ print(idgenerator('ORDERS'))
 @app.route('/')
 def home():
     return render_template('index.html')
+
+#Functions or API's for every front end hyperlinks
 
 @app.route("/show-customers")
 def customer_show():
@@ -270,7 +273,7 @@ def deleteproduct():
     else:
         return render_template('deleteproduct.html')
     
-@app.route("/delete-order", methods=['GET', 'POST'])
+@app.route("/delete-orders", methods=['GET', 'POST'])
 def deleteorder():
     if request.method == 'POST':
         conn=sqlite3.connect('ims.db')
