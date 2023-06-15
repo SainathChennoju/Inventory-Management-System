@@ -1,88 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Show Customers</title>
     <style>
-        /* CSS Styles */
+        /* Add your beautiful background styles here */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: #f2f2f2;
+            background-image: linear-gradient(to bottom right, #3366ff, #00ccff);
+            background-attachment: fixed;
         }
         
-        h1 {
-            text-align: center;
-            margin-top: 50px;
+        /* Add your animations and other styles here */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            animation: fade-in 1s ease-out;
         }
-        
-        .table-container {
-            margin-top: 50px;
-            text-align: center;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        th, td {
-            padding: 10px;
-            border: 1px solid #fff;
-            color: #fff;
-        }
-        
-        th {
-            background-color: #FFA500;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            0% {
+
+        @keyframes fade-in {
+            from {
                 opacity: 0;
             }
-            100% {
+            to {
                 opacity: 1;
             }
-        }
-        
-        @keyframes slideIn {
-            0% {
-                transform: translateY(100%);
-            }
-            100% {
-                transform: translateY(0%);
-            }
-        }
-        
-        /* Animation Classes */
-        .fade-in {
-            animation: fadeIn 1s ease-in-out;
-        }
-        
-        .slide-in {
-            animation: slideIn 1s ease-in-out;
         }
     </style>
 </head>
 <body>
-    <h1>Show Customers</h1>
-    
-    <div class="table-container fade-in">
+    <div class="container">
+        <h1>Show Customers</h1>
         <table>
-            <tr>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
-                <th>Customer Address</th>
-                <th>Customer Email</th>
-            </tr>
-            {% for customer in data %}
+            <thead>
                 <tr>
-                    <td>{{ customer.customer_id }}</td>
-                    <td>{{ customer.customer_name }}</td>
-                    <td>{{ customer.customer_addr }}</td>
-                    <td>{{ customer.customer_email }}</td>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Customer Address</th>
+                    <th>Customer Email</th>
                 </tr>
-            {% endfor %}
+            </thead>
+            <tbody>
+                {% for customer in data %}
+                <tr>
+                    <td>{{ customer['customer_id'] }}</td>
+                    <td>{{ customer['customer_name'] }}</td>
+                    <td>{{ customer['customer_addr'] }}</td>
+                    <td>{{ customer['customer_email'] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
 </body>
