@@ -50,7 +50,6 @@ def customer_show():
         customer['customer_addr']=i[2]
         customer['customer_email']=i[3]
         data.append(customer)
-    print(data)
     return render_template('showcustomers.html',data=data)
 
 ################################## For Showing Products #######################################
